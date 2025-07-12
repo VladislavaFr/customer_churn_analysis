@@ -3,13 +3,19 @@ import sqlite3
 import pandas as pd
 
 def load_clients_churn() -> pd.DataFrame:
-    """
-    Загружает данные из базы SQLite в DataFrame
-    """
-    db_path = os.path.join('data', 'raw', 'banks.db')
+    # Получаем путь к текущему файлу data.py
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # base_dir — это корень проекта, папка выше, чем папка src
+
+    # Строим путь к базе данных относительно корня проекта
+    db_path = os.path.join(base_dir, 'data', 'raw', 'banks.db')
+
+    # Подключаемся к базе
     conn = sqlite3.connect(db_path)
+
     query = "SELECT * FROM clients_churn"
     clients_churn_df = pd.read_sql_query(query, conn)
+
     conn.close()
     return clients_churn_df
 
