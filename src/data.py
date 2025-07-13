@@ -2,6 +2,7 @@ import os
 import sqlite3
 import pandas as pd
 
+
 def load_clients_churn() -> pd.DataFrame:
     # Получаем путь к текущему файлу data.py
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,6 +20,7 @@ def load_clients_churn() -> pd.DataFrame:
     conn.close()
     return clients_churn_df
 
+
 def save_to_csv(df: pd.DataFrame) -> None:
     """
     Сохраняет DataFrame в CSV файл
@@ -29,6 +31,7 @@ def save_to_csv(df: pd.DataFrame) -> None:
     df.to_csv(csv_path, index=False)
     print(f"Данные сохранены в {csv_path}")
 
+
 def load_from_csv() -> pd.DataFrame:
     """
     Загружает данные из CSV в DataFrame
@@ -36,6 +39,7 @@ def load_from_csv() -> pd.DataFrame:
     csv_path = os.path.join('data', 'processed', 'clients_churn.csv')
     df = pd.read_csv(csv_path)
     return df
+
 
 def replace_cities(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -48,6 +52,7 @@ def replace_cities(df: pd.DataFrame) -> pd.DataFrame:
     }
     df['city'] = df['city'].replace(city_map)
     return df
+
 
 if __name__ == '__main__':
     df = load_clients_churn()
